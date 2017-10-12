@@ -1,76 +1,52 @@
 import numpy as np
 import pandas as pd
-import random
-import util
 
 
 def initializeRomania():
     cities = "Arad Bucharest Craiova Dobreta Eforie Fagaras Giurgiu Hirsowa Lasi Lugoj Mehadia Neamt Oradea Pitesti Rimnicu-Vilcea Sibiu Timisoara Urziceni Vaslui Zerind".split()
 
-    df = pd.DataFrame(np.zeros(400).reshape(20, 20), cities, cities)
+    romania = pd.DataFrame(np.zeros(400).reshape(20, 20), cities, cities)
 
-    # df = df.replace(0,df.replace([0],[None]))
-    # df.replace(0,np.nan,inplace=True)
-    df.loc['Arad', 'Sibiu'] = df.loc['Sibiu', 'Arad'] = 140
-    df.loc['Arad', 'Zerind'] = df.loc['Zerind', 'Arad'] = 75
-    df.loc['Arad', 'Timisoara'] = df.loc['Timisoara', 'Arad'] = 118
-    df.loc['Zerind', 'Oradea'] = df.loc['Oradea', 'Zerind'] = 71
-    df.loc['Oradea', 'Sibiu'] = df.loc['Sibiu', 'Oradea'] = 151
-    df.loc['Timisoara', 'Lugoj'] = df.loc['Lugoj', 'Timisoara'] = 111
-    df.loc['Lugoj', 'Mehadia'] = df.loc['Mehadia', 'Lugoj'] = 70
-    df.loc['Mehadia', 'Dobreta'] = df.loc['Dobreta', 'Mehadia'] = 75
-    df.loc['Dobreta', 'Craiova'] = df.loc['Craiova', 'Dobreta'] = 120
-    df.loc['Craiova', 'Rimnicu-Vilcea'] = df.loc['Rimnicu-Vilcea', 'Craiova'] = 146
-    df.loc['Craiova', 'Pitesti'] = df.loc['Pitesti', 'Craiova'] = 138
-    df.loc['Rimnicu-Vilcea', 'Sibiu'] = df.loc['Sibiu', 'Rimnicu-Vilcea'] = 80
-    df.loc['Rimnicu-Vilcea', 'Pitesti'] = df.loc['Pitesti', 'Rimnicu-Vilcea'] = 97
-    df.loc['Pitesti', 'Bucharest'] = df.loc['Bucharest', 'Pitesti'] = 101
-    df.loc['Sibiu', 'Fagaras'] = df.loc['Fagaras', 'Sibiu'] = 99
-    df.loc['Fagaras', 'Bucharest'] = df.loc['Bucharest', 'Fagaras'] = 211
-    df.loc['Bucharest', 'Giurgiu'] = df.loc['Giurgiu', 'Bucharest'] = 90
-    df.loc['Bucharest', 'Urziceni'] = df.loc['Urziceni', 'Bucharest'] = 85
-    df.loc['Urziceni', 'Hirsowa'] = df.loc['Hirsowa', 'Urziceni'] = 98
-    df.loc['Urziceni', 'Vaslui'] = df.loc['Vaslui', 'Urziceni'] = 142
-    df.loc['Hirsowa', 'Eforie'] = df.loc['Eforie', 'Hirsowa'] = 86
-    df.loc['Vaslui', 'Lasi'] = df.loc['Lasi', 'Vaslui'] = 92
-    df.loc['Lasi', 'Neamt'] = df.loc['Neamt', 'Lasi'] = 87
-    return df
+    romania.loc['Arad', 'Sibiu'] = romania.loc['Sibiu', 'Arad'] = 140
+    romania.loc['Arad', 'Zerind'] = romania.loc['Zerind', 'Arad'] = 75
+    romania.loc['Arad', 'Timisoara'] = romania.loc['Timisoara', 'Arad'] = 118
+    romania.loc['Zerind', 'Oradea'] = romania.loc['Oradea', 'Zerind'] = 71
+    romania.loc['Oradea', 'Sibiu'] = romania.loc['Sibiu', 'Oradea'] = 151
+    romania.loc['Timisoara', 'Lugoj'] = romania.loc['Lugoj', 'Timisoara'] = 111
+    romania.loc['Lugoj', 'Mehadia'] = romania.loc['Mehadia', 'Lugoj'] = 70
+    romania.loc['Mehadia', 'Dobreta'] = romania.loc['Dobreta', 'Mehadia'] = 75
+    romania.loc['Dobreta', 'Craiova'] = romania.loc['Craiova', 'Dobreta'] = 120
+    romania.loc['Craiova', 'Rimnicu-Vilcea'] = romania.loc['Rimnicu-Vilcea', 'Craiova'] = 146
+    romania.loc['Craiova', 'Pitesti'] = romania.loc['Pitesti', 'Craiova'] = 138
+    romania.loc['Rimnicu-Vilcea', 'Sibiu'] = romania.loc['Sibiu', 'Rimnicu-Vilcea'] = 80
+    romania.loc['Rimnicu-Vilcea', 'Pitesti'] = romania.loc['Pitesti', 'Rimnicu-Vilcea'] = 97
+    romania.loc['Pitesti', 'Bucharest'] = romania.loc['Bucharest', 'Pitesti'] = 101
+    romania.loc['Sibiu', 'Fagaras'] = romania.loc['Fagaras', 'Sibiu'] = 99
+    romania.loc['Fagaras', 'Bucharest'] = romania.loc['Bucharest', 'Fagaras'] = 211
+    romania.loc['Bucharest', 'Giurgiu'] = romania.loc['Giurgiu', 'Bucharest'] = 90
+    romania.loc['Bucharest', 'Urziceni'] = romania.loc['Urziceni', 'Bucharest'] = 85
+    romania.loc['Urziceni', 'Hirsowa'] = romania.loc['Hirsowa', 'Urziceni'] = 98
+    romania.loc['Urziceni', 'Vaslui'] = romania.loc['Vaslui', 'Urziceni'] = 142
+    romania.loc['Hirsowa', 'Eforie'] = romania.loc['Eforie', 'Hirsowa'] = 86
+    romania.loc['Vaslui', 'Lasi'] = romania.loc['Lasi', 'Vaslui'] = 92
+    romania.loc['Lasi', 'Neamt'] = romania.loc['Neamt', 'Lasi'] = 87
+    return romania
 
-df = initializeRomania()
-# print(df)
-##############################################
 
-actions = []
-
-st = util.Stack()
-source = "Arad"#input("Enter your start point:")
-destination = "Bucharest"#input("Enter your end point:")
-
-st.push(source)
-while not st.isEmpty():
-    node = st.pop()
-    if node not in actions:
-        actions.append(node)
-        successors = df.columns[(df.loc[node]>0)]
-        for each in successors:
-            if each not in actions:
-                st.push(each)
-# print(actions)
-
-###################################
-source = "Arad"  # input("Enter your start point:")
-destination = "Bucharest"  # input("Enter your end point:")
-
-def dfs_paths(country):
-
-    st = [(source, [source])]
+def romanias_paths(country,start,destination):
+    actions = []
+    st = [(start, [start])]
     while st:
         (node, path) = st.pop()
-        # print(node)
-        for next in set(df.columns[(df.loc[node] > 0)]) - set(path):
+        for next in set(romania.columns[(romania.loc[node] > 0)]) - set(path):
             if next == destination:
-                yield path + [next]
+                print("Possible path:",(path + [next]),"\n")
             else:
                 st.append((next, path + [next]))
 
-print(list(dfs_paths(df)))
+romania = initializeRomania()
+source = input("Enter your start point:")
+destination = input("Enter your end point:")
+
+print(romania) # print the DataFrame
+romanias_paths(romania,source,destination)
