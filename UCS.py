@@ -27,16 +27,13 @@ romania.add_edge('Lasi', 'Vaslui', 92)
 romania.add_edge('Neamt', 'Lasi', 87)
 
 visited = []
-not_visited = []
 node = 'Arad'
 total_cost = 0
-temp_cost = {node: total_cost}
+temp_cost = [(total_cost,node)] 
 end = 'Bucharest'
 while node is not end:
-	node = min(temp_cost,key=temp_cost.get)
-	
 	try:
-		total_cost = temp_cost.pop(node)
+		total_cost, node = temp_cost.pop(0)
 	except:
 		print("queue is empty")
 		quit()
@@ -44,18 +41,10 @@ while node is not end:
 		break
 	adjacents = romania.get_adjacents(node)
 	for adj in adjacents:
-		if (adj not in visited):
-			temp_cost[adj] = total_cost+romania.get_weight(node,adj)
-		
-		else: # adj in not_visited:
-			try:
-				if temp_cost[adj] > total_cost+romania.get_weight(node,adj) & adj not in visited:
-					temp_cost[adj] = total_cost+romania.get_weight(node,adj)
-			except:
-				# print("adjacent is not an option to revisit")
-				continue
-			
+		if adj not in visited:
+			temp_cost.append((total_cost+romania.get_weight(node,adj),adj))
 	visited.append(node)
+	temp_cost.sort()
 	print(temp_cost)
 	print(visited)
 # min_adj_cost,next_node = temp_cost.pop(0)
