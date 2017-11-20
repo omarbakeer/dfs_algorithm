@@ -26,27 +26,28 @@ romania.add_edge('Eforie', 'Hirsowa', 86)
 romania.add_edge('Lasi', 'Vaslui', 92)
 romania.add_edge('Neamt', 'Lasi', 87)
 
-visited = []
-node = 'Arad'
-total_cost = 0
-temp_cost = [(total_cost,node)] 
-end = 'Bucharest'
-while node is not end:
-	try:
-		total_cost, node = temp_cost.pop(0)
-	except:
-		print("queue is empty")
-		quit()
-	if node is end:
-		break
-	adjacents = romania.get_adjacents(node)
-	for adj in adjacents:
-		if adj not in visited:
-			temp_cost.append((total_cost+romania.get_weight(node,adj),adj))
-	visited.append(node)
-	temp_cost.sort()
-	print(temp_cost)
-	print(visited)
-# min_adj_cost,next_node = temp_cost.pop(0)
-# if total_cost < min_adj[0]
-# node = min_adj[1]
+def ucs(start='Arad',end='Bucharest',graph=romania):
+	
+	myQueue = [(0,start,[])] 
+	visited = {}
+
+	while myQueue:
+
+		cost, node, path = myQueue.pop(0)
+
+		if node in visited and visited[node] < cost:
+			continue
+
+		path = path+ [node]
+		if node == end:
+			return path
+
+		adjacents = graph.get_adjacents(node)
+		for adj in adjacents:
+			if adj not in visited:
+				myQueue.append((cost+graph.get_weight(node,adj),adj,path))
+		visited[node] = cost
+		myQueue.sort()
+	# print(myQueue)
+	# print(visited)
+print(ucs())
