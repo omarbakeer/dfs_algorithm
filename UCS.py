@@ -20,7 +20,7 @@ def ucs(graph, start='Arad', end='Bucharest'):
 		path = path + [node]
 		# Return path if you reached the destination
 		if node == end:
-			return path
+			return "The lowest path is: " + str(path)
 		# Get the adjacents and loop through them
 		for adj in graph.get_adjacents(node):
 			''' Condition to prevent the graph to go inside loop 
@@ -32,4 +32,9 @@ def ucs(graph, start='Arad', end='Bucharest'):
 		visited[node] = cost
 		
 romania = RO.romania_init()	
-print(ucs(graph=romania))
+print("\n***** click return if you want the default (Arad,Bucharest) *****")
+startN = input("Enter start node:")
+if len(startN) < 1 : startN = "Arad"
+endN = input("Enter end node:")
+if len(endN) < 1 : endN = "Bucharest"
+print(ucs(romania, startN, endN))
