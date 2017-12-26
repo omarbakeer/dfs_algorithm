@@ -9,6 +9,8 @@ def ucs(graph, start='Arad', end='Bucharest'):
 	visited = {} 
 
 	while myQueue:
+		# Order the successors ascending
+		myQueue.sort()
 		# Visit the node of lowest cost (first node)
 		cost, node, path = myQueue.pop(0)
 		# Skip if the node you're visiting is already visited with a lower cost
@@ -20,8 +22,7 @@ def ucs(graph, start='Arad', end='Bucharest'):
 		if node == end:
 			return path
 		# Get the adjacents and loop through them
-		adjacents = graph.get_adjacents(node)
-		for adj in adjacents:
+		for adj in graph.get_adjacents(node):
 			''' Condition to prevent the graph to go inside loop 
 			if you did Arad >> Sibiu you can't do Sibiu >> Arad '''
 			if adj not in visited:
@@ -29,8 +30,6 @@ def ucs(graph, start='Arad', end='Bucharest'):
 
 		# Mark this node as visited with it's new cost
 		visited[node] = cost
-		# Order the successors ascending
-		myQueue.sort()
-
+		
 romania = RO.romania_init()	
 print(ucs(graph=romania))
